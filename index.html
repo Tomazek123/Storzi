@@ -6,12 +6,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Storži - Outdoor skupnost</title>
 
-<meta property="og:title" content="Storži - Outdoor skupnost">
-<meta property="og:description" content="Razišči Slovenijo z nami. Pridruži se pohodniški skupini Storži.">
-<meta property="og:type" content="website">
-<meta property="og:url" content="https://tomazek123.github.io/Storzi/">
-<meta property="og:image" content="https://tomazek123.github.io/Storzi/slika.jpg">
-
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -21,29 +15,36 @@ body {
     font-family: 'Inter', sans-serif;
     background: #0f172a;
     color: #e5e7eb;
+    overflow-x: hidden;
 }
 
-/* ANIMATED WATERMARK */
-body::after {
-    content: "";
+/* BACKGROUND */
+.bg {
+    position: fixed;
+    inset: 0;
+    background: url("logo.jpg") center/cover no-repeat;
+    transform: scale(1.1);
+    z-index: -2;
+}
+.bg::after {
+    content:"";
+    position:absolute;
+    inset:0;
+    background: rgba(15,23,42,0.85);
+}
+
+/* WATERMARK */
+.watermark {
     position: fixed;
     inset: 0;
     background: url("logo.jpg.jpg") no-repeat center;
     background-size: 500px;
     opacity: 0.05;
     pointer-events: none;
-    animation: floatLogo 30s ease-in-out infinite;
+    z-index: -1;
 }
 
-@keyframes floatLogo {
-    0% { transform: translate(0,0) scale(1); opacity: 0.04; }
-    25% { transform: translate(10px,-10px) scale(1.02); opacity: 0.05; }
-    50% { transform: translate(-10px,10px) scale(1.03); opacity: 0.06; }
-    75% { transform: translate(5px,-5px) scale(1.02); opacity: 0.05; }
-    100% { transform: translate(0,0) scale(1); opacity: 0.04; }
-}
-
-/* NAVBAR */
+/* NAV */
 nav {
     position: fixed;
     top: 0;
@@ -54,14 +55,6 @@ nav {
     background: rgba(15,23,42,0.7);
     backdrop-filter: blur(10px);
     z-index: 10;
-}
-
-nav h1 { color: white; }
-
-nav a {
-    color: #e5e7eb;
-    margin-left: 20px;
-    text-decoration: none;
 }
 
 /* BUTTON */
@@ -76,105 +69,92 @@ button {
 /* HERO */
 .hero {
     height: 100vh;
-    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(15,23,42,1)), url('logo.jpg') center/cover;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-}
-
-.hero h2 {
-    font-size: 64px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
 }
 
 /* SECTION */
 .section {
     padding: 100px 20px;
     max-width: 1200px;
-    margin: auto;
+    margin:auto;
 }
 
-.section h3 {
-    text-align: center;
-    margin-bottom: 40px;
+/* STATS */
+.stats {
+    display:flex;
+    justify-content:space-around;
+    margin-bottom:40px;
+}
+
+/* SEARCH */
+.search {
+    margin-bottom:40px;
+    text-align:center;
+}
+.search input {
+    padding:10px;
+    width:300px;
 }
 
 /* GRID */
 .grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:30px;
 }
 
+/* CARD */
 .card {
-    height: 300px;
-    border-radius: 20px;
-    background-size: cover;
-    background-position: center;
-    position: relative;
-    transition: transform 0.3s;
+    height:300px;
+    border-radius:20px;
+    background-size:cover;
+    background-position:center;
+    position:relative;
+    transform-style:preserve-3d;
+    transition: transform 0.1s;
 }
-
-.card:hover { transform: scale(1.05); }
 
 .card::after {
-    content: "";
-    position: absolute;
-    inset: 0;
+    content:"";
+    position:absolute;
+    inset:0;
     background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
 }
 
 .card-content {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    z-index: 2;
+    position:absolute;
+    bottom:20px;
+    left:20px;
+    z-index:2;
+    transform: translateZ(40px);
 }
 
-.card a { color: white; text-decoration: none; }
-
-/* FEATURES */
-.features {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
-    gap: 30px;
-}
-
-.feature {
-    background: #111827;
-    padding: 30px;
-    border-radius: 15px;
-    text-align: center;
+/* GLOW */
+.card:hover {
+    box-shadow: 0 0 40px rgba(34,197,94,0.4);
 }
 
 /* MODAL */
 .modal {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.7);
-    display: none;
-    align-items: center;
-    justify-content: center;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.7);
+    display:none;
+    align-items:center;
+    justify-content:center;
 }
-
 .modal-content {
-    background: #111827;
-    padding: 30px;
-    border-radius: 15px;
-    width: 300px;
+    background:#111827;
+    padding:30px;
+    border-radius:15px;
 }
-
 .modal input {
-    width: 100%;
-    margin-bottom: 10px;
-    padding: 10px;
-}
-
-/* FOOTER */
-footer {
-    text-align: center;
-    padding: 40px;
-    background: #020617;
+    display:block;
+    margin-bottom:10px;
+    padding:10px;
 }
 </style>
 
@@ -182,114 +162,137 @@ footer {
 
 <body>
 
+<div class="bg" id="bg"></div>
+<div class="watermark" id="wm"></div>
+
 <nav>
     <h1>🌲 Storži</h1>
-    <div>
-        <a href="#">Domov</a>
-        <button onclick="openModal()">Dodaj izlet</button>
-    </div>
+    <button onclick="openModal()">Dodaj izlet</button>
 </nav>
 
 <section class="hero">
-    <div>
-        <h2>Razišči Slovenijo</h2>
-    </div>
-</section>
-
-<section class="section" id="izleti">
-    <h3>Zadnji izleti</h3>
-    <div class="grid" id="posts"></div>
+    <h2>Razišči Slovenijo</h2>
 </section>
 
 <section class="section">
-    <h3>Zakaj Storži?</h3>
-    <div class="features">
-        <div class="feature">
-            <h5>🏔 Avanture</h5>
-            <p>Vsak izlet je nova zgodba.</p>
-        </div>
-        <div class="feature">
-            <h5>👥 Skupnost</h5>
-            <p>Poveži se z drugimi.</p>
-        </div>
-        <div class="feature">
-            <h5>🌲 Narava</h5>
-            <p>Odkrij Slovenijo.</p>
-        </div>
-    </div>
-</section>
 
-<footer>
-    <p>© 2026 Storži</p>
-</footer>
+<div class="stats">
+    <div>🏔 12 vrhov</div>
+    <div>🥾 340 km</div>
+    <div>📅 8 izletov</div>
+</div>
+
+<div class="search">
+    <input id="search" placeholder="Išči izlet...">
+</div>
+
+<div class="grid" id="posts"></div>
+
+</section>
 
 <!-- MODAL -->
 
 <div class="modal" id="modal">
-    <div class="modal-content">
-        <h3>Nov izlet</h3>
-        <input id="title" placeholder="Naslov">
-        <input id="date" placeholder="Datum">
-        <input id="image" placeholder="Slika">
-        <input id="link" placeholder="Link">
-        <button onclick="addPost()">Shrani</button>
-    </div>
+<div class="modal-content">
+<h3>Nov izlet</h3>
+<input id="title" placeholder="Naslov">
+<input id="date" placeholder="Datum">
+<input id="image" placeholder="Slika">
+<input id="link" placeholder="Link">
+<button onclick="addPost()">Shrani</button>
+</div>
 </div>
 
 <script>
-let posts = [];
+// PARALLAX BG
+document.addEventListener('mousemove', e=>{
+    const x=(e.clientX/window.innerWidth-0.5)*20;
+    const y=(e.clientY/window.innerHeight-0.5)*20;
+    bg.style.transform=`scale(1.1) translate(${x}px,${y}px)`;
+    wm.style.transform=`translate(${x/2}px,${y/2}px)`;
+});
+
+// POSTS
+let posts=[];
 
 fetch('data.json')
-  .then(res => res.json())
-  .then(data => {
-    const saved = JSON.parse(localStorage.getItem('posts')) || [];
-    posts = [...data.posts, ...saved];
+.then(res=>res.json())
+.then(data=>{
+    const saved=JSON.parse(localStorage.getItem('posts'))||[];
+    posts=[...data.posts,...saved];
     render();
-  });
+});
 
-function render() {
-    const container = document.getElementById('posts');
-    container.innerHTML = "";
+function render(){
+    const container=document.getElementById('posts');
+    container.innerHTML="";
 
-    posts.forEach(post => {
-        const el = document.createElement('div');
-        el.className = 'card';
-        el.style.backgroundImage = `url('${post.image}')`;
+    const search=document.getElementById('search').value.toLowerCase();
 
-        el.innerHTML = `
-            <div class="card-content">
-                <h4><a href="${post.link}">${post.title}</a></h4>
-                <p>${post.date}</p>
-            </div>
+    posts.filter(p=>p.title.toLowerCase().includes(search))
+    .forEach(post=>{
+        const el=document.createElement('div');
+        el.className='card';
+        el.style.backgroundImage=`url('${post.image}')`;
+
+        el.innerHTML=`
+        <div class="card-content">
+        <h4>${post.title}</h4>
+        <p>${post.date}</p>
+        </div>
         `;
 
         container.appendChild(el);
     });
 }
 
-function openModal() {
-    document.getElementById('modal').style.display = 'flex';
+// SEARCH
+document.getElementById('search').addEventListener('input',render);
+
+// 3D TILT
+document.addEventListener('mousemove', e=>{
+document.querySelectorAll('.card').forEach(card=>{
+    const rect=card.getBoundingClientRect();
+    const x=e.clientX-rect.left;
+    const y=e.clientY-rect.top;
+
+    const rx=-(y/rect.height-0.5)*20;
+    const ry=(x/rect.width-0.5)*20;
+
+    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
+});
+});
+
+// RESET
+document.addEventListener('mouseleave',()=>{
+document.querySelectorAll('.card').forEach(c=>{
+    c.style.transform='rotateX(0) rotateY(0)';
+});
+});
+
+// ADMIN
+function openModal(){
+document.getElementById('modal').style.display='flex';
 }
 
-function addPost() {
-    const post = {
-        title: document.getElementById('title').value,
-        date: document.getElementById('date').value,
-        image: document.getElementById('image').value,
-        link: document.getElementById('link').value
-    };
+function addPost(){
+const post={
+title:title.value,
+date:date.value,
+image:image.value,
+link:link.value
+};
 
-    posts.push(post);
+posts.push(post);
 
-    const saved = JSON.parse(localStorage.getItem('posts')) || [];
-    saved.push(post);
-    localStorage.setItem('posts', JSON.stringify(saved));
+const saved=JSON.parse(localStorage.getItem('posts'))||[];
+saved.push(post);
+localStorage.setItem('posts',JSON.stringify(saved));
 
-    document.getElementById('modal').style.display = 'none';
-    render();
+modal.style.display='none';
+render();
 }
 </script>
 
 </body>
 </html>
-
