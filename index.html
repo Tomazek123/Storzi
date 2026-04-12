@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Storži - Outdoor skupnost</title>
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
@@ -22,7 +23,7 @@ body {
 .bg {
     position: fixed;
     inset: 0;
-    background: url("logo.jpg") center/cover no-repeat;
+    background: url("images/logo.webp") center/cover no-repeat;
     transform: scale(1.1);
     z-index: -2;
 }
@@ -37,7 +38,7 @@ body {
 .watermark {
     position: fixed;
     inset: 0;
-    background: url("logo.jpg") no-repeat center;
+    background: url("images/logo.webp") no-repeat center;
     background-size: 500px;
     opacity: 0.05;
     pointer-events: none;
@@ -106,14 +107,39 @@ button {
 }
 
 /* CARD */
+@keyframes sway {
+    0%,100% { transform: rotate(-0.4deg) translateY(0); }
+    50%      { transform: rotate( 0.4deg) translateY(-3px); }
+}
+
+@keyframes summit-sweep {
+    0%   { transform: translateX(-100%) skewX(-20deg); opacity: 0; }
+    30%  { opacity: 1; }
+    100% { transform: translateX(250%)  skewX(-20deg); opacity: 0; }
+}
+
 .card {
     height:300px;
     border-radius:20px;
-    background-size:cover;
+    background-size:110%;
     background-position:center;
     position:relative;
-    transform-style:preserve-3d;
-    transition: transform 0.1s;
+    overflow:hidden;
+    transition: transform 0.55s cubic-bezier(0.34,1.4,0.64,1),
+                box-shadow 0.45s ease,
+                background-size 0.55s ease;
+    animation: sway 7s ease-in-out infinite;
+}
+
+/* light sweep on hover */
+.card::before {
+    content:"";
+    position:absolute;
+    inset:0;
+    background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.18) 50%, transparent 60%);
+    z-index:3;
+    opacity:0;
+    pointer-events:none;
 }
 
 .card::after {
@@ -127,13 +153,93 @@ button {
     position:absolute;
     bottom:20px;
     left:20px;
-    z-index:2;
-    transform: translateZ(40px);
+    z-index:4;
+    transition: transform 0.45s ease;
 }
 
 .card:hover {
-    box-shadow: 0 0 40px rgba(34,197,94,0.4);
+    transform: translateY(-18px) rotate(0deg);
+    background-size:120%;
+    box-shadow: 0 28px 55px rgba(0,0,0,0.5), 0 0 35px rgba(34,197,94,0.35);
+    animation: none;
 }
+
+.card:hover::before {
+    animation: summit-sweep 0.7s ease forwards;
+}
+
+.card:hover .card-content {
+    transform: translateY(-4px);
+}
+
+/* WEATHER OVERLAYS */
+.wx-canvas {
+    position:absolute; inset:0; width:100%; height:100%;
+    border-radius:20px; z-index:2; pointer-events:none;
+}
+
+/* SUN/CLEAR */
+@keyframes sun-pulse {
+    0%,100% { opacity:.2; } 50% { opacity:.38; }
+}
+.wx-sun {
+    position:absolute; inset:0; border-radius:20px;
+    background: radial-gradient(circle at 78% 12%, rgba(255,210,50,.55) 0%, transparent 55%);
+    z-index:2; pointer-events:none;
+    animation: sun-pulse 5s ease-in-out infinite;
+}
+
+/* WIND streaks */
+@keyframes streak {
+    0%   { transform:translateX(-120%) skewX(-15deg); opacity:0; }
+    15%  { opacity:.45; }
+    85%  { opacity:.2; }
+    100% { transform:translateX(230%)  skewX(-15deg); opacity:0; }
+}
+.wx-wind {
+    position:absolute; inset:0; overflow:hidden; border-radius:20px;
+    z-index:2; pointer-events:none;
+}
+.wx-wind span {
+    position:absolute; left:0; height:1px;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+    animation: streak linear infinite;
+}
+
+/* FOG / MIST */
+@keyframes fog-drift {
+    0%,100% { transform:translateX(0)   scaleX(1);    opacity:.45; }
+    50%     { transform:translateX(7%)  scaleX(1.08); opacity:.68; }
+}
+.wx-fog {
+    position:absolute; inset:0; overflow:hidden; border-radius:20px;
+    z-index:2; pointer-events:none;
+}
+.wx-fog span {
+    position:absolute; left:-15%; width:130%; height:55%;
+    background: linear-gradient(180deg, transparent, rgba(200,215,220,.62));
+    border-radius:50%;
+    animation: fog-drift ease-in-out infinite;
+}
+.wx-fog span:nth-child(1) { bottom:0;   animation-duration:10s; }
+.wx-fog span:nth-child(2) { bottom:18%; animation-duration:14s; animation-delay:-5s; opacity:.7; }
+
+/* LIGHTNING */
+@keyframes lightning-flash {
+    0%,100% { opacity:0;  }
+    10%,30% { opacity:.9; }
+    20%     { opacity:.1; }
+}
+.wx-lightning {
+    position:absolute; inset:0; border-radius:20px;
+    background: rgba(160,185,255,.22);
+    z-index:2; pointer-events:none; opacity:0;
+}
+.wx-lightning.on { animation: lightning-flash .28s ease forwards; }
+
+/* storm: slightly dark base, lifts on hover */
+.card[data-wx="storm"]       { filter:brightness(.82); }
+.card[data-wx="storm"]:hover { filter:brightness(1); transition: filter .4s ease; }
 
 /* MODAL */
 .modal {
@@ -212,25 +318,141 @@ document.addEventListener('mousemove', e=>{
 
 // 📦 TVOJI IZLETI
 let posts = [
-{ title:"Ratitovec", date:"11. april 2026", image:"ratitovec.jpg", link:"ratitovec.html" },
-{ title:"Šmarna gora", date:"10. marec 2026", image:"smarna.jpg", link:"smarna.html" },
-{ title:"Krim", date:"2. februar 2026", image:"krim.jpg", link:"krim.html" },
-{ title:"Polhograjska Grmada", date:"9. marec 2023", image:"grmada.jpg", link:"grmada.html" },
-{ title:"Sveti Lovrenc", date:"4. februar 2026", image:"lovrenc.jpg", link:"lovrenc.html" }
+{ title:"Smarna", date:"21. marec 2026", image:"images/destinations/smarna.webp", link:"smarna.html", wx:"clear" },
+{ title:"Rakitovec", date:"11. april 2026", image:"images/destinations/rakitovec.webp", link:"rakitovec.html", wx:"snow" },
+{ title:"Lovrenc", date:"14. februar 2026", image:"images/destinations/lovrenc.webp", link:"lovrenc.html", wx:"clear" },
+{ title:"Grmada", date:"21. februar 2026", image:"images/destinations/grmada.webp", link:"grmada.html", wx:"snow" }
 ];
+
+// WEATHER SYSTEM
+const WX_TYPES = ['clear','wind','rain','snow','fog','storm'];
+let wxRAF = null;
+const wxCanvases = [];
+
+function stopWx() {
+    if (wxRAF) { cancelAnimationFrame(wxRAF); wxRAF = null; }
+    wxCanvases.length = 0;
+}
+
+function initWx(card, type) {
+    card.dataset.wx = type;
+
+    if (type === 'clear') {
+        const el = document.createElement('div');
+        el.className = 'wx-sun';
+        card.appendChild(el);
+
+    } else if (type === 'wind') {
+        const wrap = document.createElement('div');
+        wrap.className = 'wx-wind';
+        [16, 34, 52, 70].forEach((top, i) => {
+            const s = document.createElement('span');
+            s.style.cssText = `top:${top}%;width:${24+i*9}%;animation-duration:${2.1+i*.75}s;animation-delay:${-i*.85}s`;
+            wrap.appendChild(s);
+        });
+        card.appendChild(wrap);
+
+    } else if (type === 'fog') {
+        const wrap = document.createElement('div');
+        wrap.className = 'wx-fog';
+        wrap.innerHTML = '<span></span><span></span>';
+        card.appendChild(wrap);
+
+    } else if (type === 'rain' || type === 'storm') {
+        const canvas = document.createElement('canvas');
+        canvas.className = 'wx-canvas';
+        card.appendChild(canvas);
+        const count = type === 'storm' ? 90 : 55;
+        const particles = Array.from({length:count}, () => ({
+            x: Math.random()*400, y: Math.random()*300,
+            speed: 7 + Math.random()*5,
+            len: (type==='storm' ? 14 : 10) + Math.random()*6
+        }));
+        wxCanvases.push({ canvas, particles, type });
+
+        if (type === 'storm') {
+            const flash = document.createElement('div');
+            flash.className = 'wx-lightning';
+            card.appendChild(flash);
+            (function strike() {
+                setTimeout(() => {
+                    flash.classList.remove('on');
+                    void flash.offsetWidth;
+                    flash.classList.add('on');
+                    if (card.isConnected) strike();
+                }, 3500 + Math.random()*8000);
+            })();
+        }
+
+    } else if (type === 'snow') {
+        const canvas = document.createElement('canvas');
+        canvas.className = 'wx-canvas';
+        card.appendChild(canvas);
+        const particles = Array.from({length:38}, () => ({
+            x: Math.random()*400, y: Math.random()*300,
+            r: 1.5 + Math.random()*2,
+            speed: 0.7 + Math.random()*1.1,
+            drift: Math.random()*Math.PI*2,
+            dSpeed: 0.01 + Math.random()*.02
+        }));
+        wxCanvases.push({ canvas, particles, type:'snow' });
+    }
+}
+
+function tickWx() {
+    wxCanvases.forEach(({ canvas, particles, type }) => {
+        if (!canvas.isConnected) return;
+        const card = canvas.parentElement;
+        const w = card.clientWidth, h = card.clientHeight;
+        if (!w || !h) return;
+        if (canvas.width !== w) canvas.width = w;
+        if (canvas.height !== h) canvas.height = h;
+        const ctx = canvas.getContext('2d');
+        ctx.clearRect(0, 0, w, h);
+
+        if (type === 'rain' || type === 'storm') {
+            ctx.strokeStyle = `rgba(180,210,255,${type==='storm'?.78:.55})`;
+            ctx.lineWidth = type === 'storm' ? 1.5 : 1;
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.moveTo(p.x, p.y);
+                ctx.lineTo(p.x - p.len*.18, p.y + p.len);
+                ctx.stroke();
+                p.x -= p.len*.13; p.y += p.speed;
+                if (p.y > h+15) { p.y=-10; p.x=Math.random()*w; }
+                if (p.x < -10)  { p.x=w;   p.y=Math.random()*h; }
+            });
+        }
+
+        if (type === 'snow') {
+            ctx.fillStyle = 'rgba(255,255,255,.85)';
+            particles.forEach(p => {
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+                ctx.fill();
+                p.drift += p.dSpeed;
+                p.x += Math.sin(p.drift)*.55;
+                p.y += p.speed;
+                if (p.y > h+5) { p.y=-5; p.x=Math.random()*w; }
+            });
+        }
+    });
+    wxRAF = requestAnimationFrame(tickWx);
+}
 
 // RENDER
 function render(){
+    stopWx();
     const container=document.getElementById('posts');
     container.innerHTML="";
     const search=document.getElementById('search').value.toLowerCase();
 
     posts.filter(p=>p.title.toLowerCase().includes(search))
     .forEach(post=>{
+        if (!post.wx) post.wx = WX_TYPES[Math.floor(Math.random()*WX_TYPES.length)];
         const el=document.createElement('div');
         el.className='card';
         el.style.backgroundImage=`url('${post.image}')`;
-
         el.innerHTML=`
         <div class="card-content">
         <h4>${post.title}</h4>
@@ -238,7 +460,10 @@ function render(){
         </div>
         `;
         container.appendChild(el);
+        initWx(el, post.wx);
     });
+
+    if (wxCanvases.length) tickWx();
 }
 
 render();
@@ -246,26 +471,6 @@ render();
 // SEARCH
 document.getElementById('search').addEventListener('input',render);
 
-// 3D TILT
-document.addEventListener('mousemove', e=>{
-document.querySelectorAll('.card').forEach(card=>{
-    const rect=card.getBoundingClientRect();
-    const x=e.clientX-rect.left;
-    const y=e.clientY-rect.top;
-
-    const rx=-(y/rect.height-0.5)*20;
-    const ry=(x/rect.width-0.5)*20;
-
-    card.style.transform=`rotateX(${rx}deg) rotateY(${ry}deg)`;
-});
-});
-
-// RESET
-document.addEventListener('mouseleave',()=>{
-document.querySelectorAll('.card').forEach(c=>{
-    c.style.transform='rotateX(0) rotateY(0)';
-});
-});
 
 // ADMIN
 function openModal(){
