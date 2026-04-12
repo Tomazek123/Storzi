@@ -1,60 +1,220 @@
 <!DOCTYPE html>
 <html lang="sl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Storži - Pohodniška skupina</title>
-    <meta property="og:title" content="Storži - Pohodniška skupina">
-    <meta property="og:description" content="Pridruži se našim pohodom in odkrij čudovite kotičke Slovenije!">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://tomazek123.github.io/Storzi/">
-    <meta property="og:image" content="https://tomazek123.github.io/Storzi/slika.jpg">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef5ee; color: #333; }
-        header { background: linear-gradient(135deg, #2e7d32 0%, #1b5e20 100%); color: white; padding: 40px 20px; text-align: center; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        header h1 { font-size: 2.5em; margin-bottom: 10px; }
-        header p { font-size: 1.1em; opacity: 0.9; }
-        nav { background: #1b5e20; padding: 15px; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
-        nav a { color: white; margin: 0 15px; text-decoration: none; font-weight: bold; transition: opacity 0.3s; }
-        nav a:hover { opacity: 0.8; }
-        .container { max-width: 900px; margin: 30px auto; padding: 20px; }
-        h2 { color: #2e7d32; margin-bottom: 25px; font-size: 1.8em; }
-        .post { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.3s, box-shadow 0.3s; }
-        .post:hover { transform: translateY(-5px); box-shadow: 0 4px 15px rgba(0,0,0,0.15); }
-        .post h3 { margin-bottom: 10px; }
-        .post a { color: #2e7d32; text-decoration: none; font-weight: bold; }
-        .post a:hover { text-decoration: underline; }
-        footer { background: #2e7d32; color: white; text-align: center; padding: 20px; margin-top: 40px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storži - Outdoor skupnost</title>
+
+<meta property="og:title" content="Storži - Outdoor skupnost">
+<meta property="og:description" content="Razišči Slovenijo z nami. Pridruži se pohodniški skupini Storži.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tomazek123.github.io/Storzi/">
+<meta property="og:image" content="https://tomazek123.github.io/Storzi/slika.jpg">
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: #0f172a;
+    color: #e5e7eb;
+}
+
+/* NAVBAR */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 40px;
+    background: rgba(15,23,42,0.7);
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+nav h1 { color: white; }
+
+nav a {
+    color: #e5e7eb;
+    margin-left: 20px;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+/* HERO */
+.hero {
+    height: 100vh;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(15,23,42,1)), url('logo.jpg') center/cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero h2 {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    font-size: 20px;
+    max-width: 600px;
+    margin: auto;
+    opacity: 0.8;
+}
+
+.hero button {
+    margin-top: 30px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    border: none;
+    background: #22c55e;
+    color: #022c22;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.hero button:hover { background: #16a34a; }
+
+/* SECTION */
+.section {
+    padding: 100px 20px;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.section h3 {
+    font-size: 36px;
+    margin-bottom: 40px;
+    text-align: center;
+}
+
+/* CARDS */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    border-radius: 20px;
+    overflow: hidden;
+    position: relative;
+    height: 300px;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.3s;
+}
+
+.card:hover { transform: scale(1.05); }
+
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+}
+
+.card-content {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    z-index: 2;
+}
+
+.card h4 { font-size: 22px; }
+
+.card a { color: white; text-decoration: none; }
+
+/* FEATURES */
+.features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 30px;
+}
+
+.feature {
+    background: #111827;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+}
+
+.feature h5 { margin-bottom: 10px; }
+
+/* FOOTER */
+footer {
+    text-align: center;
+    padding: 40px;
+    background: #020617;
+}
+
+</style>
 </head>
 <body>
 
-<header>
-    <h1>🌲 Storži</h1>
-    <p>Pohodniška skupina</p>
-</header>
-
 <nav>
-    <a href="index.html">Domov</a>
+    <h1>🌲 Storži</h1>
+    <div>
+        <a href="#">Domov</a>
+        <a href="#izleti">Izleti</a>
+        <a href="#about">O nas</a>
+    </div>
 </nav>
 
-<div class="container">
-    <h2>Zadnji izleti</h2>
-    
-    <div class="post">
-        <h3><a href="triglav.html">Triglav - 10. maj 2026</a></h3>
-        <p>Čudovit pohod na najvišjo slovensko goro.</p>
+<section class="hero">
+    <div>
+        <h2>Razišči Slovenijo</h2>
+        <p>Pridruži se skupnosti pohodnikov in odkrij skrite kotičke narave.</p>
+        <button onclick="document.getElementById('izleti').scrollIntoView({behavior:'smooth'})">Začni</button>
     </div>
-    
-    <div class="post">
-        <h3><a href="smarna.html">Šmarna gora - 2. maj 2026</a></h3>
-        <p>Kratek, a prijeten vzpon.</p>
+</section>
+
+<section class="section" id="izleti">
+    <h3>Zadnji izleti</h3>
+
+    <div class="grid">
+        <div class="card" style="background-image:url('triglav.jpg')">
+            <div class="card-content">
+                <h4><a href="triglav.html">Triglav</a></h4>
+                <p>10. maj 2026</p>
+            </div>
+        </div>
+
+        <div class="card" style="background-image:url('smarna.jpg')">
+            <div class="card-content">
+                <h4><a href="smarna.html">Šmarna gora</a></h4>
+                <p>2. maj 2026</p>
+            </div>
+        </div>
     </div>
-</div>
+</section>
+
+<section class="section" id="about">
+    <h3>Zakaj Storži?</h3>
+
+    <div class="features">
+        <div class="feature">
+            <h5>🏔 Avanture</h5>
+            <p>Vsak izlet je nova zgodba in izkušnja.</p>
+        </div>
+        <div class="feature">
+            <h5>👥 Skupnost</h5>
+            <p>Poveži se z ljudmi, ki ljubijo naravo.</p>
+        </div>
+        <div class="feature">
+            <h5>🌲 Narava</h5>
+            <p>Odkrij najlepše kotičke Slovenije.</p>
+        </div>
+    </div>
+</section>
 
 <footer>
-    <p>© 2026 Storži</p>
+    <p>© 2026 Storži • Outdoor skupnost</p>
 </footer>
 
 </body>
