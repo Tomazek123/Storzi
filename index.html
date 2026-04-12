@@ -57,7 +57,6 @@ nav {
     z-index: 10;
 }
 
-/* BUTTON */
 button {
     background: #22c55e;
     border: none;
@@ -132,7 +131,6 @@ button {
     transform: translateZ(40px);
 }
 
-/* GLOW */
 .card:hover {
     box-shadow: 0 0 40px rgba(34,197,94,0.4);
 }
@@ -177,9 +175,9 @@ button {
 <section class="section">
 
 <div class="stats">
-    <div>🏔 12 vrhov</div>
-    <div>🥾 340 km</div>
-    <div>📅 8 izletov</div>
+    <div>🏔 5 izletov</div>
+    <div>🥾 Avanture</div>
+    <div>📅 2026</div>
 </div>
 
 <div class="search">
@@ -204,7 +202,7 @@ button {
 </div>
 
 <script>
-// PARALLAX BG
+// PARALLAX BG + WATERMARK
 document.addEventListener('mousemove', e=>{
     const x=(e.clientX/window.innerWidth-0.5)*20;
     const y=(e.clientY/window.innerHeight-0.5)*20;
@@ -212,21 +210,19 @@ document.addEventListener('mousemove', e=>{
     wm.style.transform=`translate(${x/2}px,${y/2}px)`;
 });
 
-// POSTS
-let posts=[];
+// 📦 TVOJI IZLETI
+let posts = [
+{ title:"Ratitovec", date:"11. april 2026", image:"ratitovec.jpg", link:"ratitovec.html" },
+{ title:"Šmarna gora", date:"10. marec 2026", image:"smarna.jpg", link:"smarna.html" },
+{ title:"Krim", date:"2. februar 2026", image:"krim.jpg", link:"krim.html" },
+{ title:"Polhograjska Grmada", date:"9. marec 2023", image:"grmada.jpg", link:"grmada.html" },
+{ title:"Sveti Lovrenc", date:"4. februar 2026", image:"lovrenc.jpg", link:"lovrenc.html" }
+];
 
-fetch('data.json')
-.then(res=>res.json())
-.then(data=>{
-    const saved=JSON.parse(localStorage.getItem('posts'))||[];
-    posts=[...data.posts,...saved];
-    render();
-});
-
+// RENDER
 function render(){
     const container=document.getElementById('posts');
     container.innerHTML="";
-
     const search=document.getElementById('search').value.toLowerCase();
 
     posts.filter(p=>p.title.toLowerCase().includes(search))
@@ -241,10 +237,11 @@ function render(){
         <p>${post.date}</p>
         </div>
         `;
-
         container.appendChild(el);
     });
 }
+
+render();
 
 // SEARCH
 document.getElementById('search').addEventListener('input',render);
@@ -284,11 +281,6 @@ link:link.value
 };
 
 posts.push(post);
-
-const saved=JSON.parse(localStorage.getItem('posts'))||[];
-saved.push(post);
-localStorage.setItem('posts',JSON.stringify(saved));
-
 modal.style.display='none';
 render();
 }
