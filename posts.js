@@ -18,7 +18,7 @@ var postsData = [
   {
     "title": "Ankaran",
     "date": "15. april 2026",
-    "image": "images/destinations/Ankaran.jpg",
+    "image": "images/destinations/Ankaran.jpg,
     "wx": "clear"
   },
   {
