@@ -14,7 +14,13 @@ var postsData = [
     "date": "21. marec 2026",
     "image": "images/destinations/smarna.webp",
     "wx": "clear"
-  },
+  }, 
+  {
+    "title": "Ankaran",
+    "date": "15. april 2026",
+    "image": "images/destinations/Ankaran.jpg",
+    "wx": "clear"
+  }
   {
     "title": "Rakitovec",
     "date": "11. april 2026",
