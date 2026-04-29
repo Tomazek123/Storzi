@@ -1,6 +1,10 @@
 # Cloudflare Pages reads this file natively (no plan upgrade needed).
 # Order: most specific path → least specific.
 
+# Long-lived caching for static assets that change by URL (or rarely).
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
 /favicon.ico
   Cache-Control: public, max-age=604800
 

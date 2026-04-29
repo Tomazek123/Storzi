@@ -13,6 +13,7 @@
 <link rel="canonical" href="https://storzi.org/">
 <link rel="alternate" hreflang="sl" href="https://storzi.org/">
 <link rel="alternate" hreflang="x-default" href="https://storzi.org/">
+<link rel="preload" as="image" href="images/logo.webp" fetchpriority="high">
 
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Storži">
@@ -20,12 +21,18 @@
 <meta property="og:title" content="Storži - Outdoor skupnost">
 <meta property="og:description" content="Odkrij pohode, izlete in avanture po slovenskih hribih in gorah s skupnostjo Storži.">
 <meta property="og:url" content="https://storzi.org/">
+<meta property="og:image" content="https://storzi.org/images/logo.webp">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Storži - outdoor skupnost">
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Storži - Outdoor skupnost">
 <meta name="twitter:description" content="Odkrij pohode, izlete in avanture po slovenskih hribih in gorah.">
+<meta name="twitter:image" content="https://storzi.org/images/logo.webp">
 
-<link rel="icon" href="data:,">
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/logo.webp">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -45,8 +52,10 @@
       "name": "Storži",
       "url": "https://storzi.org/",
       "logo": {
-        "@type": "Organization",
-        "@id": "https://storzi.org/#org"
+        "@type": "ImageObject",
+        "url": "https://storzi.org/images/logo.webp",
+        "width": 512,
+        "height": 512
       },
       "areaServed": {
         "@type": "Country",
@@ -99,6 +108,7 @@
           "addressRegion": "Gorenjska"
         }
       },
+      "image": "https://storzi.org/images/destinations/Triglav.webp",
       "organizer": { "@id": "https://storzi.org/#org" },
       "description": "Dvodnevna pohodniška avantura na Triglav s skupnostjo Storži."
     }
@@ -115,6 +125,7 @@
 <!-- NAV -->
 <nav>
     <a href="#" class="nav-logo" aria-label="Storži — domov">
+      <img src="images/logo.webp" alt="Storži" width="56" height="56" decoding="async">
       <span class="nav-logo-text">Storž<span>i</span></span>
     </a>
 
@@ -146,6 +157,7 @@
       </div>
     </div>
     <div class="hero-art" aria-hidden="true">
+      <img class="hero-logo" src="images/logo.webp" alt="" width="420" height="420" decoding="async" fetchpriority="high">
     </div>
   </div>
   <div class="hero-stats">
@@ -249,7 +261,10 @@
         </div>
       </div>
     </div>
-
+    <div class="about-image">
+      <img src="images/logo.webp" alt="Storži - outdoor skupnost" width="280" height="280" loading="lazy">
+    </div>
+    
 
   </div>
 </section>
@@ -259,6 +274,7 @@
   <div class="modal-backdrop"></div>
   <div class="modal-content">
     <button class="modal-close" aria-label="Zapri">&times;</button>
+    <img id="modal-img" class="modal-img" src="" alt="">
     <div class="modal-body">
       <h2 id="modal-title"></h2>
       <p id="modal-date" class="modal-date"></p>
@@ -415,9 +431,11 @@ function buildPastAdventures() {
     el.dataset.title = post.title.toLowerCase();
     const year = (post.date.match(/\b(20\d{2})\b/) || [null, '2026'])[1];
     const sealId = `seal-${post.izletId || post.title.replace(/\W+/g, '').toLowerCase()}`;
-    el.innerHTML = `
+     el.innerHTML = `
+       <img class="card-img" src="${post.image}" alt="Pohod ${post.title} - pretekla avantura skupnosti Storži, ${post.date}" loading="lazy" decoding="async">
        <div class="card-seal" aria-hidden="true" title="Opravljeno">
          <svg class="card-seal-svg" viewBox="0 0 100 100" role="img" aria-label="Storži – opravljeno">
+           <image href="images/logo.webp" x="15" y="15" width="70" height="70" preserveAspectRatio="xMidYMid meet" opacity="0.85"></image>
           <text x="50" y="46" text-anchor="middle" font-family="var(--font-body)" font-size="10" font-weight="700" fill="#fff" letter-spacing="1.5" opacity="0.9" style="text-shadow: 0 1px 2px rgba(0,0,0,0.6);">OPRAVLJENO</text>
           <text x="50" y="75" text-anchor="middle" font-family="var(--font-body)" font-size="26" font-weight="700" fill="#fff" opacity="0.9" style="text-shadow: 0 1px 3px rgba(0,0,0,0.6);">${year}</text>
         </svg>
@@ -502,6 +520,7 @@ async function saveComment(izlet, avtor, tekst) {
 
 function openTripModal(post) {
   const modal = document.getElementById('trip-modal');
+  const modalImg = document.getElementById('modal-img');
   const modalTitle = document.getElementById('modal-title');
   const modalDate = document.getElementById('modal-date');
   const modalDifficulty = document.getElementById('modal-difficulty');
@@ -509,6 +528,7 @@ function openTripModal(post) {
   
   const commentKey = post.title.toLowerCase().replace(/\s+/g, '-');
   
+  modalImg.src = post.image;
   modalTitle.textContent = post.title;
   modalDate.textContent = post.date;
   
