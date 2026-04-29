@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stran ni najdena · Storži</title>
+<meta name="description" content="Iskane strani ni. Vrni se na domačo stran skupnosti Storži.">
+<meta name="robots" content="noindex, follow">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+<style>
+  .nf {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 2rem 1.2rem;
+    gap: 1.2rem;
+  }
+  .nf-logo { width: 80px; height: 80px; border-radius: 16px; }
+  .nf-code {
+    font-family: var(--font-display, "Playfair Display", serif);
+    font-size: clamp(4rem, 14vw, 8rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--moss, #6b8e5a);
+    letter-spacing: -0.02em;
+    margin: 0;
+  }
+  .nf-title {
+    font-family: var(--font-display, "Playfair Display", serif);
+    font-size: clamp(1.4rem, 4vw, 2rem);
+    font-weight: 700;
+    margin: 0;
+  }
+  .nf-sub {
+    max-width: 32rem;
+    color: var(--text-muted, #6c6760);
+    margin: 0;
+  }
+  .nf-cta {
+    display: inline-block;
+    margin-top: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    background: var(--moss, #6b8e5a);
+    color: #fff;
+    border-radius: 999px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .nf-cta:hover { transform: translateY(-2px); }
+</style>
+</head>
+<body>
+<main class="nf">
+  <p class="nf-code">404</p>
+  <h1 class="nf-title">Te poti ni na zemljevidu.</h1>
+  <p class="nf-sub">Stran, ki jo iščeš, ne obstaja ali pa je še niso utrli. Vrni se na izhodišče.</p>
+  <a href="/" class="nf-cta">Nazaj na domačo stran</a>
+</main>
+</body>
+</html>
