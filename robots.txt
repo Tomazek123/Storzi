@@ -1,0 +1,17 @@
+User-agent: *
+Allow: /
+
+# AI/LLM crawlers — opt out by default; remove these blocks if you want them indexed
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+Sitemap: https://storzi.org/sitemap.xml

@@ -1,0 +1,106 @@
+/* =============================================
+   PRIJAVE — dodaj na konec style.css
+   ============================================= */
+
+.prijave-wrap {
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px solid var(--border);
+}
+
+.prijave-glave {
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--moss);
+  margin-bottom: 0.5rem;
+}
+
+.prijave-lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-bottom: 0.85rem;
+}
+
+.prijave-ime {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(74,124,89,0.1);
+  color: var(--text-secondary);
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 20px;
+  border: 1px solid rgba(74,124,89,0.2);
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--pine), var(--forest));
+  color: #fff;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+.prijave-prazno {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-bottom: 0.85rem;
+  font-style: italic;
+}
+
+.prijave-forma {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.prijave-input {
+  flex: 1;
+  min-width: 120px;
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+.prijave-input::placeholder { color: var(--text-muted); }
+.prijave-input:focus {
+  border-color: var(--moss);
+  box-shadow: 0 0 0 3px rgba(74,124,89,0.12);
+}
+
+.prijave-btn {
+  padding: 0.45rem 1rem;
+  background: var(--forest);
+  color: #e8f0eb;
+  border: none;
+  border-radius: 20px;
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.2s;
+}
+.prijave-btn:hover:not(:disabled) { background: var(--pine); }
+.prijave-btn:disabled { opacity: 0.5; cursor: default; }
+
+.prijave-msg {
+  font-size: 0.78rem;
+  color: var(--amber);
+  width: 100%;
+}

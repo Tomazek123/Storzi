@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Storži - Outdoor skupnost | Pohodništvo in avanture po Sloveniji</title>
+<meta name="description" content="Storži je outdoor skupnost za ljubitelje narave. Odkrij pohode, izlete in avanture po slovenskih hribih, gorah in skritih kotičkih Slovenije.">
+<meta name="author" content="Storži">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="googlebot" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#1a3a2a">
+<link rel="canonical" href="https://storzi.org/">
+<link rel="alternate" hreflang="sl" href="https://storzi.org/">
+<link rel="alternate" hreflang="x-default" href="https://storzi.org/">
+<link rel="preload" as="image" href="images/logo.webp" fetchpriority="high">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Storži">
+<meta property="og:locale" content="sl_SI">
+<meta property="og:title" content="Storži - Outdoor skupnost">
+<meta property="og:description" content="Odkrij pohode, izlete in avanture po slovenskih hribih in gorah s skupnostjo Storži.">
+<meta property="og:url" content="https://storzi.org/">
+<meta property="og:image" content="https://storzi.org/images/logo.webp">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Storži - outdoor skupnost">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Storži - Outdoor skupnost">
+<meta name="twitter:description" content="Odkrij pohode, izlete in avanture po slovenskih hribih in gorah.">
+<meta name="twitter:image" content="https://storzi.org/images/logo.webp">
+
+<link rel="icon" type="image/x-icon" href="images/favicon.ico">
+<link rel="apple-touch-icon" href="images/logo.webp">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+<link rel="stylesheet" href="prijave.css">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://storzi.org/#org",
+      "name": "Storži",
+      "url": "https://storzi.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://storzi.org/images/logo.webp",
+        "width": 512,
+        "height": 512
+      },
+      "areaServed": {
+        "@type": "Country",
+        "name": "Slovenija"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://storzi.org/#website",
+      "url": "https://storzi.org/",
+      "name": "Storži",
+      "alternateName": "Storži - Outdoor skupnost",
+      "description": "Outdoor skupnost za pohodništvo, izlete in avanture po Sloveniji.",
+      "inLanguage": "sl-SI",
+      "publisher": { "@id": "https://storzi.org/#org" },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://storzi.org/?q={search_term_string}#izleti",
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "ItemList",
+      "name": "Pretekle avanture skupnosti Storži",
+      "itemListOrder": "https://schema.org/ItemListOrderAscending",
+      "numberOfItems": 7,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Krim", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 2, "name": "Lovrenc", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 3, "name": "Grmada", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 4, "name": "Šmarna gora", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 5, "name": "Ratitovec", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 6, "name": "Ankaran", "url": "https://storzi.org/#izleti" },
+        { "@type": "ListItem", "position": 7, "name": "Rožnik", "url": "https://storzi.org/#izleti" }
+      ]
+    },
+    {
+      "@type": "Event",
+      "name": "Triglav — skupna avantura",
+      "startDate": "2026-08-26",
+      "endDate": "2026-08-27",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "eventAttendanceMode": "https://schema.org/OfflineEventAttendanceMode",
+      "location": {
+        "@type": "Place",
+        "name": "Triglav",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "SI",
+          "addressRegion": "Gorenjska"
+        }
+      },
+      "image": "https://storzi.org/images/destinations/Triglav.webp",
+      "organizer": { "@id": "https://storzi.org/#org" },
+      "description": "Dvodnevna pohodniška avantura na Triglav s skupnostjo Storži."
+    }
+  ]
+}
+</script>
+
+</head>
+
+<body>
+
+<div class="bg" id="bg"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo" aria-label="Storži — domov">
+    <img src="images/logo.webp" alt="Storži" width="56" height="56" decoding="async">
+    <span class="nav-logo-text">Storž<span>i</span></span>
+  </a>
+
+  <a href="#next-adventures" class="nav-timer" id="nav-timer" aria-label="Odštevalnik do naslednje avanture">
+    <span class="nav-timer-label" id="nav-timer-label">Naslednja avantura</span>
+    <span class="nav-timer-dest" id="nav-timer-dest">–</span>
+    <span class="nav-timer-count" id="nav-timer-count">–</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#next-adventures">Avanture</a></li>
+    <li><a href="#izleti">Izleti</a></li>
+    <li><a href="#map">Zemljevid</a></li>
+    <li><button class="theme-toggle" id="theme-toggle">🌙</button></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">Slovenska outdoor skupnost</div>
+      <h1 class="hero-title">Razišči gore,<br><em>deli pustolovščine</em></h1>
+      <p class="hero-sub">Pohodi, skupne avanture in lokalno znanje za vse, ki jih kličejo slovenske gore.</p>
+      <div class="hero-cta">
+        <a href="#next-adventures" class="btn-primary">Oglej avanture</a>
+        <a href="#izleti" class="btn-sec">Pretekle avanture →</a>
+        <a href="#o-nas" class="btn-sec">O nas →</a>
+      </div>
+    </div>
+    <div class="hero-art" aria-hidden="true">
+      <img class="hero-logo" src="images/logo.webp" alt="" width="420" height="420" decoding="async" fetchpriority="high">
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="hero-stat"><strong>5</strong><span>izletov</span></div>
+    <div class="hero-stat"><strong>2026</strong><span>sezona</span></div>
+    <div class="hero-stat"><strong>🥾</strong><span>avanture</span></div>
+</div>
+</section>
+
+<!-- NEXT ADVENTURES -->
+<section class="section">
+  <div class="section-header">
+    <h2 id="next-adventures" class="section-title">Naslednje avanture</h2>
+  </div>
+  <div class="grid" id="next-adventures-grid"></div>
+</section>
+
+<!-- IZLETI -->
+<section class="section section-alt">
+  <div class="section-header">
+    <h2 id="izleti" class="section-title">Pretekle avanture</h2>
+  </div>
+
+  <div class="search-wrap">
+    <input id="search" class="search-input" placeholder="Išči izlet…">
+  </div>
+
+  <div class="grid" id="posts"></div>
+
+  <noscript>
+    <ul class="noscript-list">
+      <li>Krim — 25. januar 2026</li>
+      <li>Lovrenc — 14. februar 2026</li>
+      <li>Grmada — 21. februar 2026</li>
+      <li>Šmarna gora — 21. marec 2026</li>
+      <li>Ratitovec — 11. april 2026</li>
+      <li>Ankaran — 15. april 2026</li>
+      <li>Rožnik — 26. april 2026</li>
+      <li>Triglav — 26. avgust 2026 (2 dni)</li>
+    </ul>
+  </noscript>
+</section>
+
+<!-- MAP -->
+<section class="section" id="map-section">
+  <div class="section-header">
+    <h2 id="map" class="section-title">Zemljevid avantur</h2>
+  </div>
+  <div class="map-frame">
+    <div class="map-vintage-bg"></div>
+    <div class="map-stain" aria-hidden="true"></div>
+    <div class="map-compass" aria-hidden="true">
+      <svg viewBox="0 0 80 80" width="44" height="44">
+        <circle cx="40" cy="40" r="32" fill="none" stroke="#003397" stroke-width="2"/>
+        <polygon points="40,12 43,32 40,27 37,32" fill="#fff" stroke="#003397" stroke-width="1"/>
+        <polygon points="40,68 37,48 40,53 43,48" fill="#ee1c25"/>
+        <text x="40" y="22" text-anchor="middle" font-size="8" font-weight="bold" fill="#003397">S</text>
+        <text x="40" y="70" text-anchor="middle" font-size="8" font-weight="bold" fill="#003397">J</text>
+        <text x="64" y="43" text-anchor="middle" font-size="8" font-weight="bold" fill="#003397">Z</text>
+        <text x="16" y="43" text-anchor="middle" font-size="8" font-weight="bold" fill="#003397">V</text>
+      </svg>
+    </div>
+    <div class="map-scale" aria-hidden="true">
+      <div class="scale-line"></div>
+      <span>5 km</span>
+    </div>
+    <div class="map-contour-lines" aria-hidden="true"></div>
+    <div id="adventure-map" class="adventure-map" aria-label="Zemljevid lokacij izletov skupnosti Storži"></div>
+    <div class="map-legend" aria-label="Legenda">
+      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--past"></span>Pretekle avanture</span>
+      <span class="map-legend-item"><span class="map-legend-dot map-legend-dot--next"></span>Naslednja avantura</span>
+    </div>
+  </div>
+</section>
+
+<!-- O NAS -->
+<section class="section" id="o-nas">
+  <div class="section-header">
+    <h2 class="section-title">O nas</h2>
+  </div>
+  <div class="about-grid">
+    <div class="about-content">
+      <p class="about-lead">Smo skupnost ljubiteljev narave, ki združujemo pohodnike, gornike in vse, ki jih kličejo slovenski hribi.</p>
+      <p>Vsak mesec organiziramo pohode po najlepših kotičkih Slovenije - od znanih vrhov do skritih naravnih lepot. Na naših avanturah se družimo, delimo izkušnje in ustvarjamo nepozabne spomine.</p>
+      <p>Trenutno smo še majhna, a trdna skupnost. Veselimo se, da nas bo postalo več - pridruži se nam in odkrij lepote slovenskih gora skupaj z nami!</p>
+      <div class="about-values">
+        <div class="about-value">
+          <span class="about-icon">🤝</span>
+          <strong>Skupnost</strong>
+          <span>Povezujemo ljudi z isto strastjo do narave</span>
+        </div>
+        <div class="about-value">
+          <span class="about-icon">🏔️</span>
+          <strong>Aventura</strong>
+          <span>Odkrivamo nove poti in destinacije</span>
+        </div>
+        <div class="about-value">
+          <span class="about-icon">🌿</span>
+          <strong>Trajnost</strong>
+          <span>Spoštujemo naravo in pustimo le odtise čevljev</span>
+        </div>
+      </div>
+    </div>
+    <div class="about-image">
+      <img src="images/logo.webp" alt="Storži - outdoor skupnost" width="280" height="280" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- TRIP DETAIL MODAL -->
+<div id="trip-modal" class="modal" aria-hidden="true">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <button class="modal-close" aria-label="Zapri">&times;</button>
+    <img id="modal-img" class="modal-img" src="" alt="">
+    <div class="modal-body">
+      <h2 id="modal-title"></h2>
+      <p id="modal-date" class="modal-date"></p>
+      <div id="modal-difficulty"></div>
+      <div class="modal-comments" style="display: none;">
+        <h3>Komentarji</h3>
+        <div id="comments-list" class="comments-list"></div>
+        <form id="comment-form" class="comment-form">
+          <textarea id="comment-text" placeholder="Kako je bilo na izletu?" rows="3"></textarea>
+          <input type="text" id="comment-author" placeholder="Ime">
+          <button type="submit" class="btn-primary">Dodaj komentar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer class="site-footer">
+  <div class="footer-logo">Storži</div>
+  <p class="footer-sub">Slovenska outdoor skupnost · © 2026</p>
+</footer>
+
+<script src="prijave.js"></script>
+<script src="posts.js"></script>
+<script>
+const COMMENTI_ENABLED = false;
+const API_URL = 'https://storzi.tommybeast8.workers.dev';
+// PARALLAX BG
+// Parallax: skip entirely if user prefers reduced motion or is on a touch device.
+// Throttle via rAF so we coalesce multiple mousemoves into one paint.
+const motionOk = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+              && !window.matchMedia('(hover: none)').matches;
+if (motionOk) {
+  let queued = false, lastX = 0, lastY = 0;
+  document.addEventListener('mousemove', e => {
+    lastX = e.clientX; lastY = e.clientY;
+    if (queued) return;
+    queued = true;
+    requestAnimationFrame(() => {
+      const x = (lastX / window.innerWidth - 0.5) * 20;
+      const y = (lastY / window.innerHeight - 0.5) * 20;
+      bg.style.transform = `scale(1.1) translate(${x}px,${y}px)`;
+      queued = false;
+    });
+  });
+}
+
+// WEATHER SYSTEM (nespremenjen)
+const WX_TYPES = ['clear','wind','rain','snow','fog','storm'];
+let wxRAF = null;
+const wxCanvases = [];
+
+function initWx(card, type) {
+  card.dataset.wx = type;
+  if (type === 'clear') {
+    const el = document.createElement('div');
+    el.className = 'wx-sun';
+    card.appendChild(el);
+  } else if (type === 'wind') {
+    const wrap = document.createElement('div');
+    wrap.className = 'wx-wind';
+    [16, 34, 52, 70].forEach((top, i) => {
+      const s = document.createElement('span');
+      s.style.cssText = `top:${top}%;width:${24+i*9}%;animation-duration:${2.1+i*.75}s;animation-delay:${-i*.85}s`;
+      wrap.appendChild(s);
+    });
+    card.appendChild(wrap);
+  } else if (type === 'fog') {
+    const wrap = document.createElement('div');
+    wrap.className = 'wx-fog';
+    wrap.innerHTML = '<span></span><span></span>';
+    card.appendChild(wrap);
+  } else if (type === 'rain' || type === 'storm') {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'wx-canvas';
+    card.appendChild(canvas);
+    const count = type === 'storm' ? 90 : 55;
+    const particles = Array.from({length:count}, () => ({
+      x: Math.random()*400, y: Math.random()*300,
+      speed: 7 + Math.random()*5,
+      len: (type==='storm' ? 14 : 10) + Math.random()*6
+    }));
+    wxCanvases.push({ canvas, particles, type });
+    if (type === 'storm') {
+      const flash = document.createElement('div');
+      flash.className = 'wx-lightning';
+      card.appendChild(flash);
+      (function strike() {
+        setTimeout(() => {
+          flash.classList.remove('on');
+          void flash.offsetWidth;
+          flash.classList.add('on');
+          if (card.isConnected) strike();
+        }, 3500 + Math.random()*8000);
+      })();
+    }
+  } else if (type === 'snow') {
+    const canvas = document.createElement('canvas');
+    canvas.className = 'wx-canvas';
+    card.appendChild(canvas);
+    const particles = Array.from({length:38}, () => ({
+      x: Math.random()*400, y: Math.random()*300,
+      r: 1.5 + Math.random()*2,
+      speed: 0.7 + Math.random()*1.1,
+      drift: Math.random()*Math.PI*2,
+      dSpeed: 0.01 + Math.random()*.02
+    }));
+    wxCanvases.push({ canvas, particles, type:'snow' });
+  }
+}
+
+function tickWx() {
+  wxCanvases.forEach(({ canvas, particles, type }) => {
+    if (!canvas.isConnected) return;
+    const card = canvas.parentElement;
+    const w = card.clientWidth, h = card.clientHeight;
+    if (!w || !h) return;
+    if (canvas.width !== w) canvas.width = w;
+    if (canvas.height !== h) canvas.height = h;
+    const ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, w, h);
+    if (type === 'rain' || type === 'storm') {
+      ctx.strokeStyle = `rgba(180,210,255,${type==='storm'?.78:.55})`;
+      ctx.lineWidth = type === 'storm' ? 1.5 : 1;
+      particles.forEach(p => {
+        ctx.beginPath(); ctx.moveTo(p.x, p.y);
+        ctx.lineTo(p.x - p.len*.18, p.y + p.len); ctx.stroke();
+        p.x -= p.len*.13; p.y += p.speed;
+        if (p.y > h+15) { p.y=-10; p.x=Math.random()*w; }
+        if (p.x < -10)  { p.x=w;   p.y=Math.random()*h; }
+      });
+    }
+    if (type === 'snow') {
+      ctx.fillStyle = 'rgba(255,255,255,.85)';
+      particles.forEach(p => {
+        ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2); ctx.fill();
+        p.drift += p.dSpeed;
+        p.x += Math.sin(p.drift)*.55; p.y += p.speed;
+        if (p.y > h+5) { p.y=-5; p.x=Math.random()*w; }
+      });
+    }
+  });
+  wxRAF = requestAnimationFrame(tickWx);
+}
+
+// BUILD PRETEKLE AVANTURE ONCE — no DOM destruction on search, so no in-flight image aborts
+function buildPastAdventures() {
+  const container = document.getElementById('posts');
+  container.innerHTML = "";
+  pastAdventures.forEach(post => {
+    if (!post.wx) post.wx = WX_TYPES[Math.floor(Math.random()*WX_TYPES.length)];
+    const el = document.createElement('article');
+    el.className = 'card card-past';
+    el.dataset.title = post.title.toLowerCase();
+    const year = (post.date.match(/\b(20\d{2})\b/) || [null, '2026'])[1];
+    const sealId = `seal-${post.izletId || post.title.replace(/\W+/g, '').toLowerCase()}`;
+    el.innerHTML = `
+      <img class="card-img" src="${post.image}" alt="Pohod ${post.title} - pretekla avantura skupnosti Storži, ${post.date}" loading="lazy" decoding="async">
+      <div class="card-seal" aria-hidden="true" title="Opravljeno">
+        <svg class="card-seal-svg" viewBox="0 0 100 100" role="img" aria-label="Storži – opravljeno">
+          <image href="images/logo.webp" x="15" y="15" width="70" height="70" preserveAspectRatio="xMidYMid meet" opacity="0.85"></image>
+          <text x="50" y="46" text-anchor="middle" font-family="var(--font-body)" font-size="10" font-weight="700" fill="#fff" letter-spacing="1.5" opacity="0.9" style="text-shadow: 0 1px 2px rgba(0,0,0,0.6);">OPRAVLJENO</text>
+          <text x="50" y="75" text-anchor="middle" font-family="var(--font-body)" font-size="26" font-weight="700" fill="#fff" opacity="0.9" style="text-shadow: 0 1px 3px rgba(0,0,0,0.6);">${year}</text>
+        </svg>
+      </div>
+      <div class="card-content">
+        <div class="card-tag">Pretekli izlet</div>
+        <h3>${post.title}</h3>
+        <p class="card-date">${post.date}</p>
+        ${post.difficulty ? `<div class="difficulty" title="Težavnost: ${difficultyLabels[post.difficulty].label}"><span class="filled">&#9679;</span>${'&#9675;'.repeat(4-post.difficulty)} <span>${difficultyLabels[post.difficulty].label}</span></div>` : ''}
+      </div>
+    `;
+    container.appendChild(el);
+    // readOnly: false — for past trips, allow "I was there!" signups
+    if (post.izletId) dodajPrijaveNaKarto(el, post.izletId, { readOnly: false });
+    initWx(el, post.wx);
+  });
+  if (wxCanvases.length) tickWx();
+}
+
+// FILTER ON SEARCH — toggle display only, never re-fetches images
+function filterPosts() {
+  const search = document.getElementById('search').value.toLowerCase().trim();
+  document.querySelectorAll('#posts .card').forEach(el => {
+    el.style.display = el.dataset.title.includes(search) ? '' : 'none';
+  });
+}
+
+// RENDER NEXT ADVENTURES
+function renderNextAdventures() {
+  const container = document.getElementById('next-adventures-grid');
+  container.innerHTML = "";
+  nextAdventures.forEach(adv => {
+    if (!adv.wx) adv.wx = WX_TYPES[Math.floor(Math.random()*WX_TYPES.length)];
+    const el = document.createElement('article');
+    el.className = 'card card-featured';
+    const altParts = [adv.estDate, adv.estTime].filter(Boolean).join(', ');
+    el.innerHTML = `
+      <img class="card-img" src="${adv.image}" alt="Naslednja avantura: ${adv.title}${altParts ? ' - ' + altParts : ''} - Storži outdoor skupnost" loading="lazy" decoding="async">
+      <div class="card-content">
+        <div class="card-tag card-tag--adventure">Avantura</div>
+        <h3>${adv.title}</h3>
+        ${adv.estDate ? `<p class="card-date">${adv.estDate}</p>` : ''}
+        ${adv.estTime ? `<p class="card-meta">${adv.estTime}</p>` : ''}
+        ${adv.difficulty ? `<div class="difficulty" title="Težavnost: ${difficultyLabels[adv.difficulty].label}"><span class="filled">&#9679;</span>${'&#9675;'.repeat(4-adv.difficulty)} <span>${difficultyLabels[adv.difficulty].label}</span></div>` : ''}
+      </div>
+    `;
+    container.appendChild(el);
+    if (adv.izletId) dodajPrijaveNaKarto(el, adv.izletId);
+    initWx(el, adv.wx);
+  });
+}
+
+// MODAL FUNCTIONALITY
+// Comments from server
+const API_URL = 'https://storzi.tommybeast8.workers.dev';
+
+async function loadComments(izlet) {
+  try {
+    const res = await fetch(API_URL + '/komentarji?izlet=' + izlet);
+    const data = await res.json();
+    return data.komentarji || [];
+  } catch(e) {
+    console.error('Error loading comments:', e);
+    return [];
+  }
+}
+
+async function saveComment(izlet, avtor, tekst) {
+  try {
+    const res = await fetch(API_URL + '/komentarji', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ izlet, avtor, tekst })
+    });
+    const data = await res.json();
+    return data.komentarji || [];
+  } catch(e) {
+    console.error('Error saving comment:', e);
+    return null;
+  }
+}
+
+function openTripModal(post) {
+  const modal = document.getElementById('trip-modal');
+  const modalImg = document.getElementById('modal-img');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDate = document.getElementById('modal-date');
+  const modalDifficulty = document.getElementById('modal-difficulty');
+  const commentsList = document.getElementById('comments-list');
+  
+  const commentKey = post.title.toLowerCase().replace(/\s+/g, '-');
+  
+  modalImg.src = post.image;
+  modalTitle.textContent = post.title;
+  modalDate.textContent = post.date;
+  
+  if (post.difficulty) {
+    modalDifficulty.innerHTML = `<div class="difficulty"><span class="filled">${'&#9679;'.repeat(post.difficulty)}</span>${'&#9675;'.repeat(4-post.difficulty)} <span>${difficultyLabels[post.difficulty].label}</span></div>`;
+  } else {
+    modalDifficulty.innerHTML = '';
+  }
+  
+  modal.classList.add('active');
+  modal.removeAttribute('aria-hidden');
+  modal.dataset.izletId = commentKey;
+}
+  
+  // Load comments from server
+  commentsList.innerHTML = '<p>Nalagam komentarje...</p>';
+  loadComments(commentKey).then(komentarji => {
+    commentsList.innerHTML = komentarji.length ? komentarji.map(c => `
+      <div class="comment">
+        <div class="comment-author">${c.avtor}</div>
+        <div class="comment-text">${c.tekst}</div>
+        <div class="comment-date">${new Date(c.datum).toLocaleDateString('sl-SI')}</div>
+      </div>
+    `).join('') : '<p class="text-muted">Ni komentarjev. Bodite prvi!</p>';
+  });
+}
+
+function closeTripModal() {
+  const modal = document.getElementById('trip-modal');
+  modal.classList.remove('active');
+  modal.setAttribute('aria-hidden', 'true');
+}
+
+document.querySelector('.modal-close').addEventListener('click', closeTripModal);
+document.querySelector('.modal-backdrop').addEventListener('click', closeTripModal);
+
+document.getElementById('comment-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const modal = document.getElementById('trip-modal');
+  const izletId = modal.dataset.izletId;
+  const text = document.getElementById('comment-text').value;
+  const author = document.getElementById('comment-author').value || 'Anonimec';
+  
+  if (!text.trim()) return;
+  
+  const btn = document.querySelector('#comment-form button');
+  btn.disabled = true;
+  btn.textContent = 'Pošiljam...';
+  
+  const komentarji = await saveComment(izletId, author, text);
+  
+  document.getElementById('comment-text').value = '';
+  document.getElementById('comment-author').value = '';
+  btn.disabled = false;
+  btn.textContent = 'Dodaj komentar';
+  
+  if (komentarji) {
+    const commentsList = document.getElementById('comments-list');
+    commentsList.innerHTML = komentarji.map(c => `
+      <div class="comment">
+        <div class="comment-author">${c.avtor}</div>
+        <div class="comment-text">${c.tekst}</div>
+        <div class="comment-date">${new Date(c.datum).toLocaleDateString('sl-SI')}</div>
+      </div>
+    `).join('');
+  }
+});
+
+// Add click handlers for cards
+function setupCardClickHandlers() {
+  console.log('Setting up click handlers...');
+  const cards = document.querySelectorAll('#posts .card-past');
+  console.log('Found cards:', cards.length);
+  
+  cards.forEach(card => {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', () => {
+      console.log('Card clicked!');
+      const title = card.querySelector('h3').textContent;
+      console.log('Looking for post:', title);
+      const post = pastAdventures.find(p => p.title === title);
+      console.log('Found post:', post);
+      if (post) openTripModal(post);
+    });
+  });
+}
+
+// Run after cards are rendered
+renderNextAdventures();
+buildPastAdventures();
+
+// Add click handlers
+var cards = document.querySelectorAll('.card-past');
+for (var i = 0; i < cards.length; i++) {
+  (function(card) {
+    card.style.cursor = 'pointer';
+    card.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      var title = card.querySelector('h3').textContent;
+      var post = pastAdventures.find(p => p.title === title);
+      if (post) openTripModal(post);
+    });
+  })(cards[i]);
+}
+
+document.getElementById('search').addEventListener('input', filterPosts);
+
+// THEME TOGGLE
+const themeBtn = document.getElementById('theme-toggle');
+if (localStorage.getItem('theme') === 'light') {
+  document.body.classList.add('light');
+  themeBtn.textContent = '☀️';
+}
+themeBtn.addEventListener('click', () => {
+  document.body.classList.toggle('light');
+  const isLight = document.body.classList.contains('light');
+  themeBtn.textContent = isLight ? '☀️' : '🌙';
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
+});
+
+// MAP
+function initMap() {
+  const map = L.map('adventure-map', {
+    scrollWheelZoom: false   // don't hijack page scroll
+  }).setView([46.15, 14.5], 8);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+    maxZoom: 18
+  }).addTo(map);
+
+  // Custom circular marker matching brand colors
+  function makeIcon(color) {
+    return L.divIcon({
+      className: '',
+      html: `<span class="map-pin" style="background:${color}"></span>`,
+      iconSize: [16, 16],
+      iconAnchor: [8, 8],
+      popupAnchor: [0, -12]
+    });
+  }
+
+  const pastIcon = makeIcon('var(--moss, #6b8e5a)');
+  const nextIcon = makeIcon('var(--amber, #e87b35)');
+
+  pastAdventures.forEach(p => {
+    if (!p.lat || !p.lng) return;
+    L.marker([p.lat, p.lng], { icon: pastIcon })
+      .addTo(map)
+      .bindPopup(`
+        <div class="map-popup">
+          <img src="${p.image}" alt="${p.title}" class="map-popup-img">
+          <strong>${p.title}</strong>
+          <span>${p.date}</span>
+        </div>
+      `);
+  });
+
+  nextAdventures.forEach(a => {
+    if (!a.lat || !a.lng) return;
+    L.marker([a.lat, a.lng], { icon: nextIcon })
+      .addTo(map)
+      .bindPopup(`
+        <div class="map-popup">
+          <img src="${a.image}" alt="${a.title}" class="map-popup-img">
+          <strong>${a.title}</strong>
+          <span>${a.estDate || ''}</span>
+        </div>
+      `);
+  });
+
+  // Enable scroll zoom only when user has clicked on the map
+  map.once('click', () => map.scrollWheelZoom.enable());
+}
+
+// Load Leaflet on demand when map scrolls into view.
+// Static script tag would fail on file:// (browser blocks https:// cross-origin),
+// so we inject it dynamically and wait for onload before calling initMap.
+const mapObserver = new IntersectionObserver(entries => {
+  if (!entries[0].isIntersecting) return;
+  mapObserver.disconnect();
+
+  if (typeof L !== 'undefined') { initMap(); return; }
+
+  const script = document.createElement('script');
+  script.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+  script.crossOrigin = '';
+  script.onload = initMap;
+  script.onerror = () => {
+    document.getElementById('adventure-map').innerHTML =
+      '<p style="padding:2rem;text-align:center;opacity:0.5">Zemljevid ni na voljo brez internetne povezave.</p>';
+  };
+  document.head.appendChild(script);
+}, { rootMargin: '200px' });
+
+mapObserver.observe(document.getElementById('adventure-map'));
+
+// COUNTDOWN — drives the nav timer pill
+(function initTimer() {
+  const SL_MONTHS = { januar:0, februar:1, marec:2, april:3, maj:4, junij:5,
+    julij:6, avgust:7, september:8, oktober:9, november:10, december:11 };
+
+  function parseSlDate(str) {
+    const m = str.match(/(\d{1,2})\.\s*(\w+)\s+(\d{4})/);
+    if (!m) return null;
+    const month = SL_MONTHS[m[2].toLowerCase()];
+    if (month === undefined) return null;
+    return new Date(+m[3], month, +m[1]);
+  }
+
+  const target = nextAdventures.find(a => a.estDate);
+  if (!target) return;
+
+  const end = parseSlDate(target.estDate);
+  if (!end) return;
+
+  const navCount = document.getElementById('nav-timer-count');
+  const navDest  = document.getElementById('nav-timer-dest');
+  if (navDest) navDest.textContent = target.title;
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = end - Date.now();
+
+    if (diff <= 0) {
+      if (navCount) navCount.textContent = '🏔 že tu!';
+      return;
+    }
+
+    const d = Math.floor(diff / 86400000);
+    const h = Math.floor((diff % 86400000) / 3600000);
+    const min = Math.floor((diff % 3600000) / 60000);
+    const s = Math.floor((diff % 60000) / 1000);
+
+    if (navCount) navCount.textContent = d > 0 ? `${d}d ${pad(h)}h ${pad(min)}m` : `${pad(h)}:${pad(min)}:${pad(s)}`;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+
+</body>
+</html>

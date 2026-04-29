@@ -1,0 +1,40 @@
+# Cloudflare Pages reads this file natively (no plan upgrade needed).
+# Order: most specific path → least specific.
+
+# Long-lived caching for static assets that change by URL (or rarely).
+/images/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/favicon.ico
+  Cache-Control: public, max-age=604800
+
+# CSS/JS edited occasionally — cache for a day, must revalidate.
+/style.css
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/prijave.css
+  Cache-Control: public, max-age=86400, must-revalidate
+
+# Trip data changes more often — short cache so updates appear quickly.
+/posts.js
+  Cache-Control: public, max-age=300, must-revalidate
+
+/prijave.js
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Sitemap/robots — short cache so SEO updates take effect quickly.
+/sitemap.xml
+  Cache-Control: public, max-age=3600
+
+/robots.txt
+  Cache-Control: public, max-age=3600
+
+# Security + privacy headers for every response.
+/*
+  X-Content-Type-Options: nosniff
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(), usb=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Content-Security-Policy: default-src 'self'; img-src 'self' data: https:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://unpkg.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://unpkg.com; connect-src 'self' https://storzi.tommybeast8.workers.dev https://*.tile.openstreetmap.org https://unpkg.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'
+  Cache-Control: public, max-age=300, must-revalidate
