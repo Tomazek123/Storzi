@@ -1,0 +1,1 @@
+Start-Process -FilePath "C:\Program Files\GitHub CLI\gh.exe" -ArgumentList "auth","status" -NoNewWindow -Wait

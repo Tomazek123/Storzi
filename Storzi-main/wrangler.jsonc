@@ -1,0 +1,27 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "storzi",
+  "compatibility_date": "2026-04-25",
+  "observability": {
+    "enabled": true
+  },
+  "assets": {
+    "directory": "."
+  },
+  "compatibility_flags": [
+    "nodejs_compat"
+  ],
+  "main": "worker.js",
+  "kv_namespaces": [
+    {
+      "binding": "PRIJAVE",
+      "id": "f6ea81bbfdfc423e971f9d2d18d6bd93",
+      "remote": true
+    },
+    {
+      "binding": "KOMENTARJI",
+      "id": "1f128a45d9504a4aa880da82b3baf952",
+      "remote": true
+    }
+  ]
+}
